@@ -1,3 +1,5 @@
-module github.com/hirokinakano/go-webapp
+module go-webapp
 
 go 1.15
+
+require github.com/gorilla/mux v1.8.0
