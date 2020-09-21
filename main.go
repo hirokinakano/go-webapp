@@ -20,6 +20,7 @@ func handleRequests()  {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/articles", returnAllArticles)
+	myRouter.HandleFunc("/article/{id}", returnSingleArticle)
 	log.Fatal(http.ListenAndServe(":8081", myRouter))
 }
 
@@ -28,6 +29,7 @@ func main() {
 }
 
 type Article struct {
+	Id int `json:"id"`
 	Title string `json:Title`
 	Desc string `json:"desc"`
 	Content string `json:"content"`
@@ -47,3 +49,12 @@ func returnAllArticles(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(articles)
 }
 
+func returnSingleArticle(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	key := vars["id"]
+	fmt.Fprintf(w, vars)
+	fmt.Fprintf(w, "Key: " + key + "\n")
+	//article := Article{Id: key, Title: "タイトル" }
+	//json.NewEncoder(w).Encode(article)
+
+}

@@ -1,21 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func main() {
-	var s []int
-	printSlice(s)
-
-	s = append(s, 0)
-	printSlice(s)
-
-	s = append(s, 1)
-	printSlice(s)
-
-	s = append(s, 2, 4, 5)
-	printSlice(s)
+func goroutine(s string) {
+	for i := 0; i < 5; i++ {
+		time.Sleep(100 * time.Microsecond)
+		fmt.Println(s)
+	}
 }
 
-func printSlice(s []int) {
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+func normal(s string) {
+	for i := 0; i < 5; i++ {
+		time.Sleep(100 * time.Microsecond)
+		fmt.Println(s)
+	}
+}
+
+func main() {
+	goroutine("world")
+	normal("hello")
 }
